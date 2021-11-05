@@ -1,0 +1,9 @@
+[submodule "external/optim"]
+	path = external/optim
+	url = https://github.com/DavidJourdan/optim
+[submodule "external/fabsim"]
+	path = external/fabsim
+	url = https://github.com/DavidJourdan/fabsim
+[submodule "external/polyscope"]
+	path = external/polyscope
+	url = https://github.com/nmwsharp/polyscope
