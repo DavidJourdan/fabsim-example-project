@@ -11,15 +11,15 @@ int main(int argc, char *argv[])
   // initialize geometry
   fsim::Mat3<double> V(94, 3);
   for (int i = 0; i < 94; ++i)
-    // V.row(i) << sin(i / 15.), -cos(i / 15.), 0;
-    V.row(i) << i / 94., 0, 0; // uncomment this line for a cantilever test
+    V.row(i) << sin(i / 15.), -cos(i / 15.), 0;
+    // V.row(i) << i / 94., 0, 0; // uncomment this line for a cantilever test
 
   // parameters of the rod model, cross-section can be circular or rectangular
-  const double thickness = 1;
+  const double thickness = 6;
   const double width = 7;
   const double young_modulus = 10;
   const double mass = 1;
-  fsim::RodParams params = {thickness, width, young_modulus, mass, fsim::CrossSection::Square};
+  fsim::RodParams params = {thickness, width, young_modulus, mass, fsim::CrossSection::Circle};
   
   // declare ElasticRod object
   fsim::ElasticRod rod(V, Vector3d::UnitZ(), params);

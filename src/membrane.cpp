@@ -1,4 +1,4 @@
-#include <fsim/ElasticMembrane.h>
+#include <fsim/StVKMembrane.h>
 #include <fsim/util/io.h>
 #include <fsim/util/typedefs.h>
 #include <optim/NewtonSolver.h>
@@ -20,7 +20,7 @@ int main(int argc, char *argv[]) {
   double mass = 1;
 
   // declare StVKMembrane object (could be replaced seamlessly with e.g. NeohookeanMembrane)
-  fsim::StVKMembrane<> model(V / stretch_factor, F, thickness, young_modulus, poisson_ratio, mass);
+  fsim::StVKMembrane model(V.leftCols(2) / stretch_factor, F, thickness, young_modulus, poisson_ratio, mass);
 
   // declare NewtonSolver object
   optim::NewtonSolver<double> solver;
@@ -42,7 +42,7 @@ int main(int argc, char *argv[]) {
   {
     ImGui::PushItemWidth(100);
     if(ImGui::InputDouble("Stretch factor", &stretch_factor, 0, 0, "%.1f"))
-      model = fsim::StVKMembrane<>(V / stretch_factor, F, thickness, young_modulus, poisson_ratio, mass);
+      model = fsim::StVKMembrane(V.leftCols(2) / stretch_factor, F, thickness, young_modulus, poisson_ratio, mass);
     
     if(ImGui::InputDouble("Mass", &mass, 0, 0, "%.1f"))
       model.setMass(mass);
