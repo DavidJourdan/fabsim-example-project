@@ -66,7 +66,7 @@ int main(int argc, char *argv[])
     if(ImGui::Button("Solve")) 
     {
       // prepare input variables for the Newton solver
-      VectorXd var = VectorXd::Zero(V.size() + V.rows() - 1);
+      VectorXd var = VectorXd::Zero(rod.nbDOFs());
       var.head(V.size()) = Map<VectorXd>(V.data(), V.size());
       rod.updateProperties(var); // necessary to do so if it's not the first solve
       
@@ -77,7 +77,7 @@ int main(int argc, char *argv[])
       polyscope::getCurveNetwork("rod")->updateNodePositions(
           Map<fsim::Mat3<double>>(solver.var().data(), V.rows(), 3));
 
-      rod.getRotatedDirectors(solver.var().tail(V.rows() - 1), D1, D2);
+      rod.getRotatedDirectors(solver.var().tail(rod.nbEdges()), D1, D2);
       polyscope::getCurveNetwork("rod")->addEdgeVectorQuantity("D1", D1);
       polyscope::getCurveNetwork("rod")->addEdgeVectorQuantity("D2", D2);
     }
